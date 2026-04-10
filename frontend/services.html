@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Beauty Clinic - Our Services</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="specialists.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+        
+        <div class="logo">
+            <a href="index.html" class="logo-container">
+                <img src="images/Logo.png" alt="Beauty Clinic Logo">
+                <h2>The <span>Beauty</span> Clinic</h2>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="prices.html">Prices</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="booking.html" class="btn-book-nav">BOOK NOW</a>
+    </header>
+
+    <section class="page-header">
+        <h1>Our Services</h1>
+        <p>Explore our range of beauty and aesthetic treatments.</p>
+    </section>
+
+    <section class="services-container">
+        <div class="service-card">
+            <img src="images/laser.jpg" alt="Laser Hair Removal" class="service-img">
+            <div class="service-info">
+                <h3>Laser Hair Removal</h3>
+                <p>Duration: 30 min</p>
+                <div class="card-buttons">
+                    <a href="#" class="btn-card-outline btn-view-details" 
+                       data-title="Laser Hair Removal" 
+                       data-duration="30 min" 
+                       data-desc="Get rid of unwanted hair permanently with our advanced laser technology. Safe, painless, and effective for all skin types.">
+                       VIEW DETAILS
+                    </a>
+                    <a href="booking.html" class="btn-card-solid">BOOK NOW</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="images/botox.jpg" alt="Botox" class="service-img">
+            <div class="service-info">
+                <h3>Botox</h3>
+                <p>Duration: 30 min</p>
+                <div class="card-buttons">
+                    <a href="#" class="btn-card-outline btn-view-details"
+                       data-title="Botox"
+                       data-duration="30 min"
+                       data-desc="Smooth out fine lines and wrinkles with our premium Botox treatments. Quick results with zero downtime.">
+                       VIEW DETAILS
+                    </a>
+                    <a href="booking.html" class="btn-card-solid">BOOK NOW</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="images/fillers.jpg" alt="Fillers" class="service-img">
+            <div class="service-info">
+                <h3>Fillers</h3>
+                <p>Duration: 30 min</p>
+                <div class="card-buttons">
+                    <a href="#" class="btn-card-outline btn-view-details"
+                       data-title="Fillers"
+                       data-duration="30 min"
+                       data-desc="Enhance your facial contours and restore lost volume with our safe and natural-looking dermal fillers.">
+                       VIEW DETAILS
+                    </a>
+                    <a href="booking.html" class="btn-card-solid">BOOK NOW</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="images/facial.jpg" alt="Facial Treatment" class="service-img">
+            <div class="service-info">
+                <h3>Facial Treatment</h3>
+                <p>Duration: 60 min</p>
+                <div class="card-buttons">
+                    <a href="#" class="btn-card-outline btn-view-details"
+                       data-title="Facial Treatment"
+                       data-duration="60 min"
+                       data-desc="Rejuvenate your skin with our deep-cleansing and hydrating facial treatments tailored to your skin type.">
+                       VIEW DETAILS
+                    </a>
+                    <a href="booking.html" class="btn-card-solid">BOOK NOW</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modalTitle">Service Title</h2>
+            <p class="modal-duration" id="modalDuration">Duration: -- min</p>
+            
+            <div class="modal-body">
+                <p id="modalDesc">Service description goes here...</p>
+                <ul class="modal-benefits">
+                    <li>✓ Safe and effective treatment</li>
+                    <li>✓ Fast recovery with no downtime</li>
+                    <li>✓ Long-lasting results</li>
+                </ul>
+            </div>
+            
+            <a href="booking.html" class="btn-card-solid" style="display: inline-block; margin-top: 20px;">BOOK APPOINTMENT</a>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

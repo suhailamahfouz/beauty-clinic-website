@@ -1,0 +1,377 @@
+/* --- Global Variables (Darker Pink Theme) --- */
+:root {
+    --bg-color: #f6e6e895; /* لون خلفية بينك هادي */
+    --primary-pink: #b55a68; /* لون بينك أغمق وأبرز للأزرار */
+    --dark-pink: #8c404d; /* لون بينك داكن جداً لتأثير الـ Hover */
+    --text-main: #3a282b; /* لون نصوص مائل للبني الداكن جداً ليكون واضح */
+    --text-light: #ffffff;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+/* --- Basic Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-main);
+}
+
+/* --- Navbar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: #e5babfe0; 
+    border-bottom: 1px solid #b55a684d; 
+    position: fixed; 
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary-pink);
+}
+
+
+.btn-book-nav {
+    border: 1px solid var(--primary-pink);
+    padding: 8px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--primary-pink);
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.btn-book-nav:hover {
+    background-color: var(--primary-pink);
+    color: var(--text-light);
+}
+/* --- Logo (Image + Text) --- */
+.logo a.logo-container {
+    display: flex; /* بيخلي الصورة والنص جنب بعض */
+    align-items: center; /* بيوسطنهم بالطول عشان ميبقوش طالعين ونازلين */
+    gap: 12px; /* مسافة شيك بين الصورة والنص */
+}
+
+.logo img {
+    height: 60px; /* صغرنا الصورة سيكا عشان النص هياخد مساحة */
+    width: 120px;
+    transition: transform 0.3s ease;
+}
+
+.logo h2 {
+    font-family: var(--font-heading);
+    font-size: 24px; /* صغرنا الخط شوية عشان التناسق مع الصورة */
+    color: var(--text-main);
+    font-weight: 600;
+    margin: 0; /* عشان نشيل أي مسافات زيادة فوق أو تحت النص */
+}
+
+.logo span {
+    font-style: italic;
+    color: var(--primary-pink);
+}
+
+.logo a:hover img {
+    transform: scale(1.05); /* تأثير التكبير على الصورة بس وقت الـ hover */
+}
+
+/* --- Hero Section (for index.html) --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 10%;
+
+    background-color: #e6a9dc3e;
+    background-image: url('../images/home-page.png');
+    background-repeat: no-repeat;
+
+    background-size: 70%;
+    background-position: right bottom;
+
+    background-blend-mode: overlay;
+}
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-family: var(--font-heading);
+    font-size: 80px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: var(--primary-pink);
+}
+
+.hero-content p {
+    font-size: 22px;
+    margin-bottom: 40px;
+    font-weight: 400;
+    color: var(--text-main);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 15px 30px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-pink);
+    border: 1px solid var(--primary-pink);
+    color: var(--text-light);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--text-main);
+    color: var(--text-main);
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-pink);
+    border-color: var(--dark-pink);
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary-pink);
+    color: var(--primary-pink);
+}
+
+/* ========================================= */
+/* --- Services Page Styles (كان ناقص هنا) --- */
+/* ========================================= */
+
+.page-header {
+    padding: 150px 20px 50px; 
+    text-align: center;
+}
+
+.page-header h1 {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    color: var(--primary-pink);
+    margin-bottom: 15px;
+}
+
+.page-header p {
+    font-size: 16px;
+    color: var(--text-main);
+    opacity: 0.8;
+}
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    padding: 0 10% 80px;
+}
+
+.service-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(181, 90, 104, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.service-info {
+    padding: 25px;
+    text-align: center;
+}
+
+.service-info h3 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    color: var(--text-main);
+    margin-bottom: 10px;
+}
+
+.service-info p {
+    font-size: 14px;
+    color: var(--primary-pink);
+    margin-bottom: 25px;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-card-outline, .btn-card-solid {
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.btn-card-solid {
+    background-color: var(--primary-pink);
+    border: 1px solid var(--primary-pink);
+    color: var(--text-light);
+}
+
+.btn-card-outline {
+    background-color: transparent;
+    border: 1px solid var(--text-main);
+    color: var(--text-main);
+}
+
+.btn-card-solid:hover {
+    background-color: var(--dark-pink);
+    border-color: var(--dark-pink);
+}
+
+.btn-card-outline:hover {
+    border-color: var(--primary-pink);
+    color: var(--primary-pink);
+}
+
+
+/* ========================================= */
+/* --- Modal (Popup) Styles --- */
+/* ========================================= */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(58, 40, 43, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(181, 90, 104, 0.2);
+    
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--primary-pink);
+}
+
+.modal-content h2 {
+    font-family: var(--font-heading);
+    color: var(--primary-pink);
+    margin-bottom: 5px;
+}
+
+.modal-duration {
+    font-size: 14px;
+    color: var(--text-main);
+    opacity: 0.7;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.modal-body p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.modal-benefits {
+    list-style: none;
+    text-align: left;
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.modal-benefits li {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
