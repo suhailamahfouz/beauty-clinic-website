@@ -1,0 +1,132 @@
+/* =========================================
+   Responsive Design (الموبايل والتابلت)
+   ========================================= */
+
+/* -----------------------------------------
+   1. تظبيط الشاشات المتوسطة (Tablets)
+   ----------------------------------------- */
+@media (max-width: 992px) {
+    /* تصغير العناوين الرئيسية */
+    .hero-content h1 { font-size: 60px; }
+    .page-header h1, .contact-header h1, .gallery-header h1 { font-size: 36px; }
+    
+    /* شبكة الأدمن */
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    .tables-grid { grid-template-columns: 1fr; }
+    .schedule-container { grid-template-columns: 1fr; }
+}
+
+/* -----------------------------------------
+   2. تظبيط شاشات الموبايل (Mobile Phones)
+   ----------------------------------------- */
+@media (max-width: 768px) {
+    
+    /* --- واجهة العميل (Frontend) --- */
+    
+    /* الناف بار (Navbar) */
+    .navbar { 
+        flex-direction: column; 
+        padding: 15px; 
+        gap: 15px; 
+    }
+    .nav-links { 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 10px; 
+    }
+    
+    /* الـ Hero Section */
+    .hero { 
+        padding-left: 5%; 
+        padding-right: 5%; 
+        text-align: center; 
+        justify-content: center; 
+        background-position: center; 
+    }
+    .hero-content h1 { font-size: 45px; }
+    .hero-content p { font-size: 16px; }
+    .hero-buttons { 
+        flex-direction: column; 
+        align-items: center; 
+    }
+    .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+
+    /* الهيدر بتاع الصفحات الداخلية */
+    .page-header, .specialists-header, .contact-header, .gallery-header, .booking-header {
+        padding: 180px 20px 40px; /* زودنا المساحة اللي فوق عشان الناف بار كبرت */
+    }
+
+    /* الكروت والشبكات (Grid to Stack) */
+    .services-container, .specialists-grid, .gallery-grid { 
+        grid-template-columns: 1fr; 
+        padding: 0 5% 50px; 
+    }
+    
+    /* بروفايل الدكتور وتواصل معنا */
+    .profile-card { flex-direction: column; }
+    .profile-info-col { padding: 30px 20px; text-align: center; }
+    .profile-stats { flex-direction: column; gap: 20px; align-items: center; }
+    .btn-book-profile { width: 100%; }
+
+    .contact-container { grid-template-columns: 1fr; gap: 30px; }
+    .form-row { flex-direction: column; gap: 0; }
+    
+    /* صفحة الحجز */
+    .booking-section { margin: 180px 20px 50px; padding: 25px; }
+    .booking-section .row { flex-direction: column; gap: 0; }
+
+    /* Modal (النافذة المنبثقة) */
+    .modal-content { width: 95%; padding: 25px; }
+
+    /* --- لوحة تحكم الأدمن (Admin Dashboard) --- */
+    
+    .admin-body { flex-direction: column; overflow: auto; }
+    
+    /* تحويل القائمة الجانبية لقائمة أفقية قابلة للتمرير */
+    .sidebar { 
+        width: 100%; 
+        height: auto; 
+        padding: 10px; 
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        position: sticky; 
+        top: 0; 
+        z-index: 100; 
+    }
+    .sidebar-logo { margin-bottom: 15px; }
+    .nav-menu { 
+        display: flex; 
+        flex-direction: row; 
+        overflow-x: auto; 
+        white-space: nowrap; 
+        padding-bottom: 5px; 
+    }
+    .nav-item { margin-bottom: 0; margin-right: 10px; }
+    .nav-link { padding: 8px 15px; border-radius: 20px; border: none; }
+    .nav-item.active .nav-link, .active-btn { 
+        border-radius: 20px !important; 
+        margin-right: 10px; 
+    }
+    .sidebar-footer { display: none; } /* إخفاء الفوتر في الموبايل لتوفير المساحة */
+
+    /* منطقة المحتوى للأدمن */
+    .main-content, .content-area { padding: 15px; overflow-y: visible; }
+    .topbar { flex-direction: column; gap: 15px; padding: 15px; }
+    .topbar-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    
+    /* الجداول (عشان متبوظش التصميم لو عريضة) */
+    .table-card, .panel { overflow-x: auto; padding: 15px; }
+    table { min-width: 600px; /* إجبار الجدول على التمرير الأفقي بدل ما يضغط الكلام */ }
+    
+    /* صفحة المواعيد للأدمن */
+    .days-grid { gap: 5px; }
+    .day { font-size: 11px; }
+}
+
+/* -----------------------------------------
+   3. شاشات الموبايل الصغيرة جداً
+   ----------------------------------------- */
+@media (max-width: 480px) {
+    .hero-content h1 { font-size: 36px; }
+    .stats-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Inbox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="icon" href="../images/Logo.png" type="image/png">
+    <style>
+        .full-message { background: #fdfdfd; border: 1px solid #eee; padding: 20px; border-radius: 12px; margin-bottom: 15px; transition: 0.3s; }
+        .full-message:hover { border-color: var(--secondary); box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .msg-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 10px;}
+        .msg-top h4 { margin: 0; color: var(--primary); font-size: 15px; }
+        .msg-top span { font-size: 11px; color: #999; }
+        .msg-body { font-size: 13px; color: #555; line-height: 1.6; margin: 0 0 15px 0; }
+        .btn-reply { background: var(--primary); color: #fff; border: none; padding: 6px 15px; border-radius: 20px; font-size: 11px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-logo"><h2>The <i>Beauty</i> Clinic.</h2></div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="nav-item"><a href="bookings.html" class="nav-link"><i class="fas fa-calendar-check"></i> Booking Requests</a></li>
+            <li class="nav-item"><a href="services.html" class="nav-link"><i class="fas fa-spa"></i> Services</a></li>
+            <li class="nav-item"><a href="specialists.html" class="nav-link"><i class="fas fa-user-md"></i> Specialists</a></li>
+            <li class="nav-item"><a href="appointments.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+            <li class="nav-item"><a href="products.html" class="nav-link"><i class="fas fa-box-open"></i> Products</a></li>
+            <li class="nav-item"><a href="users.html" class="nav-link"><i class="fas fa-users"></i> Users</a></li>
+            <li class="nav-item active"><a href="messages.html" class="nav-link active-btn"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li class="nav-item"><a href="reviews.html" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-links"><a href="../index.html">Home</a></div>
+            <div class="topbar-profile"><div class="profile-info"><img src="https://via.placeholder.com/150"><div class="profile-text"><h4>The Beauty Clinic</h4></div></div></div>
+        </header>
+
+        <div class="content-area">
+            <div class="welcome-sec">
+                <h1>Inbox</h1>
+                <p>Read and reply to inquiries from your website visitors.</p>
+            </div>
+
+            <div class="panel">
+    <div class="panel-header"><h3>Recent Messages</h3></div>
+    
+    <div id="adminMessagesList"></div>
+    
+</div>
+
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Beauty Clinic - Book Appointment</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/Logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="booking-page-body">
+
+    <header class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="specialists.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+        <div class="logo">
+            <a href="index.html" class="logo-container">
+                <img src="images/Logo.png" alt="Beauty Clinic Logo">
+                <h2>The <span>Beauty</span> Clinic</h2>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="booking.html" class="btn-book-nav">BOOK NOW</a>
+    </header>
+
+    <section class="booking-section">
+        <div class="booking-header">
+            <h1>Book Your Appointment</h1>
+            <p>Select your desired service and preferred time.</p>
+        </div>
+
+        <form id="bookingForm">
+            <div class="row">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="clientName" placeholder="e.g., Sohaila Mahfouz" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="clientPhone" placeholder="Your mobile number" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Select Service</label>
+                <select id="bookingService" required>
+                    <option value="">-- Choose a service --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Select Specialist</label>
+                <select id="bookingDoctor" required>
+                    <option value="">-- Choose a doctor --</option>
+                    <option value="Dr. Sarah (Dermatologist)">Dr. Sarah (Dermatologist)</option>
+                    <option value="Dr. Ahmed (Aesthetician)">Dr. Ahmed (Aesthetician)</option>
+                    <option value="Dr. Dina (Laser Expert)">Dr. Dina (Laser Expert)</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" id="bookingDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Time</label>
+                    <input type="time" id="bookingTime" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-card-solid" style="width: 100%; margin-top: 10px; font-size: 16px; padding: 15px;">CONFIRM BOOKING</button>
+        </form>
+    </section>
+
+    <script src="js/script.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>

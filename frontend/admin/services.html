@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/booking.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="icon" href="../images/Logo.png" type="image/png">
+
+
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>The <i>Beauty</i> Clinic.</h2>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="nav-item"><a href="bookings.html" class="nav-link"><i class="fas fa-calendar-check"></i> Booking Requests</a></li>
+            <li class="nav-item active"><a href="services.html" class="nav-link active-btn"><i class="fas fa-spa"></i> Services</a></li>
+            <li class="nav-item"><a href="specialists.html" class="nav-link"><i class="fas fa-user-md"></i> Specialists</a></li>
+            <li class="nav-item"><a href="appointments.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+            <li class="nav-item"><a href="products.html" class="nav-link"><i class="fas fa-box-open"></i> Products</a></li>
+            <li class="nav-item"><a href="users.html" class="nav-link"><i class="fas fa-users"></i> Users</a></li>
+            <li class="nav-item"><a href="messages.html" class="nav-link"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li class="nav-item"><a href="reviews.html" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="social-icons">
+                <i class="fas fa-globe"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+            &copy; 2024 The Beauty Clinic.
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        
+        <header class="topbar">
+            <div class="topbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../services.html">Services</a>
+                <a href="../specialists.html">Specialists</a>
+                <a href="../gallery.html">Gallery</a>
+            </div>
+            
+            <div class="topbar-profile">
+                <div class="topbar-icons">
+                    <i class="fas fa-search"></i>
+                    <i class="far fa-bell"></i>
+                </div>
+                <div class="profile-info">
+                    <img src="https://via.placeholder.com/150" alt="Admin">
+                    <div class="profile-text">
+                        <h4>The Beauty Clinic</h4>
+                        <p>admin@thebeautyclinic.com</p>
+                    </div>
+                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            
+            <div class="welcome-sec">
+                <h1>Manage Services</h1>
+                <p>Add new treatments and manage your clinic's service offerings.</p>
+            </div>
+
+            <div class="panel" style="max-width: 800px;">
+                <div class="panel-header">
+                    <h3>Add New Service</h3>
+                </div>
+                
+                <form id="addServiceForm">
+                    <div class="form-group">
+                        <label>Service Name</label>
+                        <input type="text" id="serviceTitle" placeholder="e.g., Derma Pen" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Duration (in minutes)</label>
+                        <input type="text" id="serviceDuration" placeholder="e.g., 45 min" required>
+                    </div>
+
+                    <div class="price-row">
+                        <div class="form-group" style="flex: 1;">
+                            <label>Regular Price ($)</label>
+                            <input type="number" id="servicePrice" placeholder="e.g., 100" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>Offer Price (Optional $)</label>
+                            <input type="number" id="serviceOffer" placeholder="e.g., 75">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Service Image</label>
+                        <input type="file" id="serviceImg" accept="image/*" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="serviceDesc" rows="4" placeholder="Write service details here..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit-form">ADD SERVICE</button>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>
