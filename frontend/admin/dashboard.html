@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - The Beauty Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="icon" href="../images/Logo.png" type="image/png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>The <i>Beauty</i> Clinic.</h2>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active"><a href="#" class="nav-link active-btn"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="nav-item"><a href="bookings.html" class="nav-link"><i class="fas fa-calendar-check"></i> Booking Requests</a></li>
+            <li class="nav-item"><a href="services.html" class="nav-link"><i class="fas fa-spa"></i> Services</a></li>
+            <li class="nav-item"><a href="specialists.html" class="nav-link"><i class="fas fa-user-md"></i> Specialists</a></li>
+            <li class="nav-item"><a href="appointments.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+            <li class="nav-item"><a href="products.html" class="nav-link"><i class="fas fa-box-open"></i> Products</a></li>
+            <li class="nav-item"><a href="messages.html" class="nav-link"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li class="nav-item"><a href="reviews.html" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="social-icons">
+                <i class="fas fa-globe"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+            &copy; 2024 The Beauty Clinic.<br>All rights reserved.
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        
+        <header class="topbar">
+            <div class="topbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../services.html">Services</a>
+                <a href="../specialists.html">Specialists</a>
+                <a href="../gallery.html" class="active">Gallery</a>
+            </div>
+            
+            <div class="topbar-profile">
+                <div class="topbar-icons">
+                    <i class="fas fa-search"></i>
+                    <i class="far fa-bell"></i>
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="profile-info">
+                    <img src="../images/logo.png" alt="Admin">
+                    <div class="profile-text">
+                        <h4>The Beauty Clinic</h4>
+                        <p>admin@thebeautyclinic.com</p>
+                    </div>
+                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            
+            <div class="welcome-sec">
+                <h1>Welcome, Admin!</h1>
+                <p>Get in touch with us for any questions or to book an appointment</p>
+            </div>
+
+            <div class="stats-grid">
+    <div class="stat-card">
+        <i class="far fa-calendar-check stat-icon"></i>
+        <div class="stat-details"><h3 id="statConfirmedAppts">0</h3><p>Confirmed<br>Appointments</p></div>
+    </div>
+    <div class="stat-card">
+        <i class="far fa-file-alt stat-icon"></i>
+        <div class="stat-details"><h3 id="statPendingBookings">0</h3><p>New<br>Booking Requests</p></div>
+    </div>
+    <div class="stat-card">
+        <i class="far fa-envelope stat-icon"></i>
+        <div class="stat-details"><h3 id="statUnreadMessages">0</h3><p>Unread<br>Messages</p></div>
+    </div>
+    <div class="stat-card">
+        <i class="fas fa-box-open stat-icon"></i>
+        <div class="stat-details"><h3 id="statTotalProducts">0</h3><p>Total<br>Products</p></div>
+    </div>
+    <div class="stat-card">
+        <i class="fas fa-user-md stat-icon"></i>
+        <div class="stat-details"><h3 id="statTotalDoctors">0</h3><p>Active<br>Specialists</p></div>
+    </div>
+</div>
+
+            <div class="tables-grid">
+                
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Booking Requests</h3>
+                        <a href="bookings.html" class="btn-view">View All ></a>
+                    </div>
+                    <table class="booking-table">
+                        <thead>
+                            <tr>
+                                <th>Client</th><th>Service</th><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminDashboardBookings">
+                            <tr><td>Sara</td><td>Laser</td><td>Dr. Sarah</td><td>15 June, 2024</td><td>10:00 AM</td><td><span class="status-badge">Pending</span></td></tr>
+                            <tr><td>Nina</td><td>Fillers</td><td>Dr. Emma</td><td>15 June, 2024</td><td>11:30 AM</td><td><span class="status-badge">Pending</span></td></tr>
+                            <tr><td>Laura</td><td>Facial</td><td>Dr. Michael</td><td>16 June, 2024</td><td>01:00 PM</td><td><span class="status-badge">Pending</span></td></tr>
+                            <tr><td>Jessica</td><td>Botox</td><td>Dr. Sophie</td><td>16 June, 2024</td><td>03:15 PM</td><td><span class="status-badge">Pending</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Recent Messages</h3>
+                        <a href="#" class="btn-view">View All ></a>
+                    </div>
+                    
+                    <div class="message-item">
+                        <div class="msg-avatar"><i class="fas fa-user"></i></div>
+                        <div class="msg-content">
+                            <div class="msg-header"><span class="msg-name">Emmaking@example.com</span><span class="msg-time">2 min ago</span></div>
+                            <p class="msg-text">I would like to reschedule my appointment...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="message-item">
+                        <div class="msg-avatar"><i class="fas fa-user"></i></div>
+                        <div class="msg-content">
+                            <div class="msg-header"><span class="msg-name">Anna@example.com</span><span class="msg-time">10 min ago</span></div>
+                            <p class="msg-text">What are your prices for laser hair removal...</p>
+                        </div>
+                    </div>
+
+                    <div class="message-item">
+                        <div class="msg-avatar"><i class="fas fa-user"></i></div>
+                        <div class="msg-content">
+                            <div class="msg-header"><span class="msg-name">Sarah@example.com</span><span class="msg-time">30 min ago</span></div>
+                            <p class="msg-text">Do you offer anti-aging treatments?</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel">
+                <div class="panel-header" style="justify-content: center; position: relative;">
+                    <h3 style="position: absolute; left: 0; top: 0;">Sales Overview</h3>
+                    <div class="chart-filters">
+                        <button class="active">Monthly</button>
+                        <button>Weekly</button>
+                        <button>Daily</button>
+                    </div>
+                </div>
+
+                <div class="chart-area">
+                    <div class="chart-stats">
+                        <h2>Today: $1,245</h2>
+                        <p>+15.0% this month</p>
+                    </div>
+                    
+                    <svg class="svg-chart" viewBox="0 0 800 150" preserveAspectRatio="none">
+                        <path class="chart-fill" d="M0,150 L0,120 Q100,100 200,130 T400,110 T600,90 T800,20 L800,150 Z"></path>
+                        <path class="chart-line" d="M0,120 Q100,100 200,130 T400,110 T600,90 T800,20"></path>
+                        <circle cx="200" cy="130" r="4" fill="#8b3a4a"/>
+                        <circle cx="400" cy="110" r="4" fill="#8b3a4a"/>
+                        <circle cx="600" cy="90" r="4" fill="#8b3a4a"/>
+                        <circle cx="800" cy="20" r="4" fill="#8b3a4a"/>
+                    </svg>
+                    
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; color: #999; padding-top: 10px;">
+                        <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>

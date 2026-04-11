@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Booking Requests</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/booking.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+<link rel="icon" href="../images/Logo.png" type="image/png">
+
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>The <i>Beauty</i> Clinic.</h2>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="nav-item active"><a href="bookings.html" class="nav-link active-btn"><i class="fas fa-calendar-check"></i> Booking Requests</a></li>
+            <li class="nav-item"><a href="services.html" class="nav-link"><i class="fas fa-spa"></i> Services</a></li>
+            <li class="nav-item"><a href="specialists.html" class="nav-link"><i class="fas fa-user-md"></i> Specialists</a></li>
+            <li class="nav-item"><a href="appointments.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+            <li class="nav-item"><a href="products.html" class="nav-link"><i class="fas fa-box-open"></i> Products</a></li>
+            <li class="nav-item"><a href="users.html" class="nav-link"><i class="fas fa-users"></i> Users</a></li>
+            <li class="nav-item"><a href="messages.html" class="nav-link"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li class="nav-item"><a href="reviews.html" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="social-icons">
+                <i class="fas fa-globe"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+            &copy; 2024 The Beauty Clinic.
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        
+        <header class="topbar">
+            <div class="topbar-links">
+                <a href="../index.html">Home</a>
+                <a href="../services.html">Services</a>
+                <a href="../specialists.html">Specialists</a>
+                <a href="../gallery.html">Gallery</a>
+            </div>
+            
+            <div class="topbar-profile">
+                <div class="topbar-icons">
+                    <i class="fas fa-search"></i>
+                    <i class="far fa-bell"></i>
+                </div>
+                <div class="profile-info">
+                    <img src="https://via.placeholder.com/150" alt="Admin">
+                    <div class="profile-text">
+                        <h4>The Beauty Clinic</h4>
+                        <p>admin@thebeautyclinic.com</p>
+                    </div>
+                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            
+            <div class="welcome-sec">
+                <h1>Booking Requests</h1>
+                <p>Manage, review, and confirm all your client appointments.</p>
+            </div>
+
+            <div class="success-banner" id="successBanner">
+                <i class="fas fa-check-circle"></i> The booking request has been confirmed successfully!
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h3>All Appointments</h3>
+                </div>
+                
+                <table class="booking-table">
+                    <thead>
+                        <tr>
+                            <th>Client Info</th>
+                            <th>Service</th>
+                            <th>Doctor</th>
+                            <th>Date & Time</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminBookingsTable">
+                        </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - The Beauty Clinic</title>
+    <link rel="icon" href="images/Logo.png" type="image/png">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="booking-page-body" style="display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+
+    <section class="booking-section" style="width: 100%; max-width: 450px; margin: 0 20px; padding: 50px 40px;">
+        
+        <div style="text-align: center; margin-bottom: 30px;">
+            <img src="images/Logo.png" alt="Logo" style="width: 80px; margin-bottom: 15px;">
+            <h1 style="font-family: 'Playfair Display', serif; color: var(--primary-pink); margin: 0 0 5px; font-size: 28px;">Admin Portal</h1>
+            <p style="color: #666; font-size: 14px; margin: 0;">Please login to access the dashboard</p>
+        </div>
+
+        <form id="adminLoginForm">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="adminEmail" placeholder="admin@thebeautyclinic.com" required>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 30px;">
+                <label>Password</label>
+                <input type="password" id="adminPassword" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-card-solid" style="width: 100%; font-size: 16px; padding: 15px; border-radius: 8px;">LOGIN TO DASHBOARD</button>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="index.html" style="font-size: 13px; color: #777; text-decoration: underline;">&larr; Back to Website</a>
+            </div>
+        </form>
+    </section>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

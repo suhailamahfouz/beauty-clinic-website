@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - The Beauty Clinic</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/Logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="specialists-page-body"> <header class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="specialists.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+        <div class="logo">
+            <a href="index.html" class="logo-container">
+                <img src="images/Logo.png" alt="Beauty Clinic Logo">
+                <h2>The <span>Beauty</span> Clinic</h2>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        <a href="booking.html" class="btn-book-nav">BOOK NOW</a>
+    </header>
+
+    <section class="contact-header">
+        <h1>Get in Touch</h1>
+        <p>We would love to hear from you. Whether you have a question about our services, pricing, or need to book an appointment, our team is ready to answer all your questions.</p>
+    </section>
+
+    <div class="contact-container">
+        
+        <div class="contact-info-card">
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="info-content">
+                    <h4>Visit Us</h4>
+                    <p>123 Beauty Avenue, El Sadat City<br>Menofia, Egypt</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                <div class="info-content">
+                    <h4>Email Us</h4>
+                    <p>info@thebeautyclinic.com<br>support@thebeautyclinic.com</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                <div class="info-content">
+                    <h4>Call Us</h4>
+                    <p>+20 101 234 5678<br>+20 112 345 6789</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon"><i class="far fa-clock"></i></div>
+                <div class="info-content">
+                    <h4>Working Hours</h4>
+                    <p>Saturday - Thursday<br>10:00 AM - 10:00 PM</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form-card">
+            <h3 style="margin-top: 0; color: #333; margin-bottom: 25px; font-size: 24px;">Send us a Message</h3>
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="contactName" placeholder="e.g. Sara Ahmed" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" id="contactPhone" placeholder="e.g. 01012345678" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="contactEmail" placeholder="e.g. sara@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Message / Question</label>
+                    <textarea id="contactMessage" rows="5" placeholder="How can we help you today?" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-send">SEND MESSAGE</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="map-container">
+        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110190.41905335503!2d30.569429158203134!3d30.379203999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458e5c83f6f3645%3A0xcda6b0808bc444d9!2sSadat%20City%2C%20Menofia%20Governorate!5e0!3m2!1sen!2seg!4v1718556600000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
