@@ -1,14 +1,22 @@
 // ==========================================
-// نظام سلة المشتريات المتقدم (تجميع المنتجات والكميات)
+// نظام سلة المشتريات والدفع (Checkout & MongoDB)
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
     renderShoppingBag();
 
-    // إظهار فورمة الدفع
+    // 1. التعبئة التلقائية لبيانات العميل في الفورمة
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+        const nameInput = document.getElementById('custName');
+        const phoneInput = document.getElementById('custPhone');
+        if (nameInput) nameInput.value = currentUser.name;
+        if (phoneInput && currentUser.phone) phoneInput.value = currentUser.phone;
+    }
+
+    // 2. إظهار فورمة الدفع
     const btnShowForm = document.getElementById('btnShowForm');
     const formWrapper = document.getElementById('checkoutFormWrapper');
-    
     if(btnShowForm) {
         btnShowForm.addEventListener('click', () => {
             let cart = JSON.parse(localStorage.getItem('clinicCart')) || [];
@@ -21,36 +29,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // تأكيد الطلب
+    // 3. تأكيد الطلب وإرساله لـ MongoDB
     const finalOrderForm = document.getElementById('finalOrderForm');
     if(finalOrderForm) {
-        finalOrderForm.addEventListener('submit', (e) => {
+        finalOrderForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             let cart = JSON.parse(localStorage.getItem('clinicCart')) || [];
             let total = cart.reduce((sum, item) => sum + Number(item.price), 0);
 
-            const order = {
-                id: Date.now(),
-                customer: document.getElementById('custName').value,
+            const orderData = {
+                customerName: document.getElementById('custName').value,
                 phone: document.getElementById('custPhone').value,
                 address: document.getElementById('custAddress').value,
-                items: cart, // بيبعت كل المنتجات للأدمن
-                total: total,
-                status: "Pending", 
-                date: new Date().toLocaleString()
+                items: cart,
+                totalAmount: total
             };
 
-            let orders = JSON.parse(localStorage.getItem('clinicOrders')) || [];
-            orders.push(order);
-            localStorage.setItem('clinicOrders', JSON.stringify(orders));
-            
-            localStorage.removeItem('clinicCart'); 
-            alert("Order Confirmed! 🎉 Enjoy your seamless experience.");
-            window.location.href = "products.html";
+            try {
+                const response = await fetch('http://localhost:3000/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                });
+
+                if (response.ok) {
+                    localStorage.removeItem('clinicCart'); 
+                    alert("Order Confirmed & Saved in MongoDB! 🎉");
+                    window.location.href = "products.html";
+                }
+            } catch (error) {
+                alert("Cannot connect to server. Check your Terminal!");
+            }
         });
     }
 });
 
+// دالة عرض المنتجات في السلة (نفس لوجيك الـ Render بتاعك النضيف)
 function renderShoppingBag() {
     const listDiv = document.getElementById('cartItemsList');
     const subtotalDisplay = document.getElementById('subtotalDisplay');
@@ -58,49 +72,36 @@ function renderShoppingBag() {
 
     let cart = JSON.parse(localStorage.getItem('clinicCart')) || [];
     let storeProducts = JSON.parse(localStorage.getItem('clinicStoreProducts')) || [];
-
-    // تجميع المنتجات المتشابهة عشان نعرض الكمية
     let groupedCart = {};
     let subtotal = 0;
 
     cart.forEach(item => {
         subtotal += Number(item.price);
-        if(groupedCart[item.id]) {
-            groupedCart[item.id].qty += 1;
-        } else {
-            groupedCart[item.id] = { ...item, qty: 1 };
-        }
+        if(groupedCart[item.id]) { groupedCart[item.id].qty += 1; } 
+        else { groupedCart[item.id] = { ...item, qty: 1 }; }
     });
 
     const uniqueItems = Object.values(groupedCart);
-
     if(uniqueItems.length === 0) {
-        listDiv.innerHTML = "<p style='color:#666; margin-top:20px; padding-bottom:20px; border-bottom: 1px solid #eaeaea;'>Your shopping cart is empty.</p>";
+        listDiv.innerHTML = "<p>Your shopping cart is empty.</p>";
         subtotalDisplay.textContent = "$0.00";
         return;
     }
 
     listDiv.innerHTML = '';
-
     uniqueItems.forEach((item) => {
-        // جلب صورة المنتج من الداتابيز
         const originalProduct = storeProducts.find(p => p.id === item.id);
-        const imgSrc = originalProduct && originalProduct.img ? originalProduct.img : 'https://via.placeholder.com/90x110?text=No+Image';
-        const itemTotalPrice = item.price * item.qty;
-
-        const rowHTML = `
+        const imgSrc = originalProduct && originalProduct.img ? originalProduct.img : 'images/default-product.png';
+        listDiv.innerHTML += `
             <div class="cart-item-row">
                 <div class="item-info">
-                    <img src="${imgSrc}" class="item-img" alt="${item.name}">
+                    <img src="${imgSrc}" class="item-img">
                     <div class="item-details">
                         <div class="item-name">${item.name}</div>
-                        <div class="item-meta">Size: Standard</div>
                         <button class="btn-remove" onclick="removeAllOfItem(${item.id})">Remove</button>
                     </div>
                 </div>
-                
                 <div class="item-price text-center">$${item.price}</div>
-                
                 <div class="text-center">
                     <div class="qty-control">
                         <button class="qty-btn" onclick="decreaseQty(${item.id})">&minus;</button>
@@ -108,43 +109,27 @@ function renderShoppingBag() {
                         <button class="qty-btn" onclick="increaseQty(${item.id}, '${item.name}', ${item.price})">&plus;</button>
                     </div>
                 </div>
-                
-                <div class="item-total text-right">$${itemTotalPrice}</div>
-            </div>
-        `;
-        listDiv.innerHTML += rowHTML;
+                <div class="item-total text-right">$${item.price * item.qty}</div>
+            </div>`;
     });
-
     subtotalDisplay.textContent = `$${subtotal.toFixed(2)}`;
-    
-    // تحديث البادج بتاع السلة في كل حتة
-    const badge = document.getElementById('cartBadge');
-    if(badge) badge.textContent = cart.length;
 }
 
-// زيادة الكمية (+)
+// الدوال المساعدة (زي ما هي عندك)
 function increaseQty(id, name, price) {
     let cart = JSON.parse(localStorage.getItem('clinicCart')) || [];
-    cart.push({ id: id, name: name, price: price });
+    cart.push({ id, name, price });
     localStorage.setItem('clinicCart', JSON.stringify(cart));
     renderShoppingBag();
 }
-
-// تقليل الكمية (-)
 function decreaseQty(id) {
     let cart = JSON.parse(localStorage.getItem('clinicCart')) || [];
-    const index = cart.findIndex(item => item.id === id); // بنجيب أول واحد بيطابق الـ id
-    if (index !== -1) {
-        cart.splice(index, 1); // بنمسح واحد بس
-        localStorage.setItem('clinicCart', JSON.stringify(cart));
-        renderShoppingBag();
-    }
+    const idx = cart.findIndex(i => i.id === id);
+    if (idx !== -1) { cart.splice(idx, 1); localStorage.setItem('clinicCart', JSON.stringify(cart)); renderShoppingBag(); }
 }
-
-// مسح المنتج بالكامل (Remove)
 function removeAllOfItem(id) {
     let cart = JSON.parse(localStorage.getItem('clinicCart')) || [];
-    cart = cart.filter(item => item.id !== id); // بنمسح كل المنتجات اللي ليها نفس الـ id
+    cart = cart.filter(i => i.id !== id);
     localStorage.setItem('clinicCart', JSON.stringify(cart));
     renderShoppingBag();
 }

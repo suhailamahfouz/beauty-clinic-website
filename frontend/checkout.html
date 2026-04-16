@@ -9,16 +9,33 @@
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="icon" href="images/Logo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <header class="navbar">
+    <header class="navbar" style="padding: 25px; top: 0px; position: relative; display: flex; align-items: center;">
         <div class="logo" style="margin: 0 auto;">
             <a href="index.html" class="logo-container">
                 <img src="images/Logo.png" alt="Beauty Clinic Logo">
                 <h2 style="color: #111;">The <span style="color: #b85c6b;">Beauty</span> Clinic</h2>
             </a>
+        </div>
+
+        <div class="user-auth-area" style="display: flex; align-items: center; gap: 15px; position: absolute; right: 40px;">
+            <a href="login.html" class="nav-link" id="navLoginBtn" style="font-weight: 500; text-decoration: none; color: #333;"><i class="fas fa-sign-in-alt"></i> Login</a>
+            
+            <div class="nav-profile" id="navProfile" style="display: none; position: relative; cursor: pointer;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-user-circle" style="font-size: 22px; color: #b85c6b;"></i>
+                    <span id="navUserName" style="font-weight: 500; color: #333;">User</span>
+                </div>
+                
+                <div id="clientDropdown" style="display: none; position: absolute; top: 130%; right: 0; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 8px; width: 160px; z-index: 1000; overflow: hidden;">
+                    <a href="admin/dashboard.html" id="adminDashLink" style="display: none; padding: 12px 15px; display: block; color: #333; text-decoration: none; border-bottom: 1px solid #eee; font-size: 14px;"><i class="fas fa-tachometer-alt" style="color: #b85c6b;"></i> Dashboard</a>
+                    <a href="profile.html" id="clientProfileLink" style="padding: 12px 15px; color: #333; text-decoration: none; display: block; border-bottom: 1px solid #eee; font-size: 14px;"><i class="fas fa-user-circle"></i> My Profile</a>
+                    <a href="#" id="clientLogoutBtn" style="padding: 12px 15px; color: #dc3545; text-decoration: none; display: block; font-size: 14px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -84,6 +101,7 @@
         </div>
     </div>
 
+    <script src="js/script.js"></script>
     <script src="js/checkout.js"></script>
 </body>
 </html>

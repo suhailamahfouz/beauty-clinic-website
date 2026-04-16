@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="specialists-page-body"> <header class="navbar">
+<body class="specialists-page-body"> 
+    <header class="navbar">
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="services.html">Services</a></li>
@@ -27,6 +28,23 @@
             <li><a href="products.html">Products</a></li>
             <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
+
+        <div class="user-auth-area" style="display: flex; align-items: center; gap: 15px; margin-left: 20px;">
+            <a href="login.html" class="nav-link" id="navLoginBtn" style="font-weight: 500;"><i class="fas fa-sign-in-alt"></i> Login</a>
+            
+            <div class="nav-profile" id="navProfile" style="display: none; position: relative; cursor: pointer;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-user-circle" style="font-size: 22px; color: var(--primary-pink);"></i>
+                    <span id="navUserName" style="font-weight: 500;">User</span>
+                </div>
+                
+                <div id="clientDropdown" style="display: none; position: absolute; top: 130%; right: 0; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 8px; width: 160px; z-index: 1000; overflow: hidden;">
+                    <a href="admin/dashboard.html" id="adminDashLink" style="display: none; padding: 12px 15px; display: block; color: #333; text-decoration: none; border-bottom: 1px solid #eee; font-size: 14px;"><i class="fas fa-tachometer-alt" style="color: var(--primary-pink);"></i> Dashboard</a>
+                    <a href="profile.html" id="clientProfileLink" style="padding: 12px 15px; display: block; color: #333; text-decoration: none; border-bottom: 1px solid #eee; font-size: 14px;"><i class="fas fa-user-circle"></i> My Profile</a>
+                    <a href="#" id="clientLogoutBtn" style="padding: 12px 15px; color: #dc3545; text-decoration: none; display: block; font-size: 14px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
         <a href="booking.html" class="btn-book-nav">BOOK NOW</a>
     </header>
 
@@ -105,6 +123,20 @@
         <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110190.41905335503!2d30.569429158203134!3d30.379203999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458e5c83f6f3645%3A0xcda6b0808bc444d9!2sSadat%20City%2C%20Menofia%20Governorate!5e0!3m2!1sen!2seg!4v1718556600000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                const nameInput = document.getElementById('contactName');
+                const phoneInput = document.getElementById('contactPhone');
+                const emailInput = document.getElementById('contactEmail');
+                
+                if (nameInput) nameInput.value = currentUser.name;
+                if (phoneInput && currentUser.phone) phoneInput.value = currentUser.phone;
+                if (emailInput && currentUser.email) emailInput.value = currentUser.email;
+            }
+        });
+    </script>
     <script src="js/script.js"></script>
 </body>
 </html>

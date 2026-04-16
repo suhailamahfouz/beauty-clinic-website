@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - The Beauty Clinic</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/Logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="booking-page-body" style="background-image: none !important; background-color: #fdf5f6 !important; margin: 0; padding: 0; min-height: 100vh;">
+
+    <header class="navbar" style="padding: 25px; top: 0px; position: relative; display: flex; align-items: center;">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+        </ul>
+        <div class="logo">
+            <a href="index.html" class="logo-container">
+                <img src="images/Logo.png" alt="Logo">
+                <h2>The <span>Beauty</span> Clinic</h2>
+            </a>
+        </div>
+        <div class="user-auth-area" style="display: flex; align-items: center; gap: 15px; margin-left: 20px;">
+            <a href="login.html" class="nav-link" id="navLoginBtn"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <div class="nav-profile" id="navProfile" style="display: none; position: relative; cursor: pointer;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-user-circle" style="font-size: 22px; color: var(--primary-pink);"></i>
+                    <span id="navUserName" style="font-weight: 500;">User</span>
+                </div>
+                <div id="clientDropdown" style="display: none; position: absolute; top: 130%; right: 0; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 8px; width: 160px; z-index: 1000;">
+                    <a href="profile.html" style="padding: 12px 15px; display: block; color: #333; text-decoration: none; border-bottom: 1px solid #eee;"><i class="fas fa-user"></i> My Profile</a>
+                    <a href="#" id="clientLogoutBtn" style="padding: 12px 15px; color: #dc3545; text-decoration: none; display: block;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <i class="fas fa-user-edit" style="font-size: 30px; color: var(--primary-pink);"></i>
+                <h3>My Details</h3>
+            </div>
+            <form id="updateProfileForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="profileName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="profileEmail" readonly style="background: #f9f9f9; cursor: not-allowed;" title="Email cannot be changed">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="profilePhone" required>
+                </div>
+                <button type="submit" class="btn-card-solid" style="width: 100%; padding: 12px;">Update Info</button>
+            </form>
+        </div>
+
+        <div class="profile-card">
+            <div class="profile-header">
+                <i class="fas fa-calendar-alt" style="font-size: 30px; color: var(--primary-pink);"></i>
+                <h3>My Appointments</h3>
+            </div>
+            <table class="booking-table" style="width: 100%; text-align: left; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #eee;">
+                        <th style="padding: 10px;">Service</th>
+                        <th>Doctor</th>
+                        <th>Date & Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="userBookingsBody">
+                    <tr><td colspan="4" style="text-align: center; padding: 20px;">Loading your bookings... ⏳</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

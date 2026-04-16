@@ -125,7 +125,7 @@ function renderDoctorProfile() {
 }
 
 // ==========================================
-// 4. نظام الحجز (Booking Logic)
+// 4. نظام الحجز (Booking Logic القديم)
 // ==========================================
 function handleBooking() {
     const bookingForm = document.getElementById('bookingForm');
@@ -145,6 +145,8 @@ function handleBooking() {
 
     if (bookingForm) {
         bookingForm.addEventListener('submit', function(e) {
+            // لو انتي شغالة بـ booking.js الجديد، الكود ده مش هيتنفذ عشان إحنا ظبطناه هناك.
+            // بس سايبينه احتياطي عشان مفيش حاجة تضرب.
             e.preventDefault(); 
             const newBooking = {
                 id: Date.now(), 
@@ -219,44 +221,35 @@ function initGallerySliders() {
 // حركات السكرول (Reveal Elements on Scroll)
 // ==========================================
 function initScrollReveal() {
-    // بنختار كل الكروت اللي عايزينها تتحرك وهي بتظهر
     const elementsToReveal = document.querySelectorAll('.service-card, .specialist-card, .product-card, .info-item, .profile-card, .ba-slider');
 
-    // بنديهم كلهم كلاس reveal المبدئي اللي بيخفيهم
     elementsToReveal.forEach(el => {
         el.classList.add('reveal');
     });
 
-    // دالة المراقبة: بتشوف إيه اللي وصل للشاشة وتظهره
     const revealOnScroll = () => {
         const windowHeight = window.innerHeight;
-        const elementVisible = 100; // المسافة اللي قبل ما يظهر الكارت
+        const elementVisible = 100;
 
         elementsToReveal.forEach((el) => {
             const elementTop = el.getBoundingClientRect().top;
             if (elementTop < windowHeight - elementVisible) {
-                el.classList.add('active'); // ظهر الكارت!
+                el.classList.add('active'); 
             }
         });
     };
 
-    // نشغلها لما اليوزر يعمل سكرول
     window.addEventListener('scroll', revealOnScroll);
-    
-    // ونشغلها مرة أول ما الصفحة تفتح عشان نظهر الحاجات اللي في أول الشاشة
     setTimeout(revealOnScroll, 100); 
 }
 // ==========================================
 // لوجيك النافذة المنبثقة (Service Modal)
 // ==========================================
-
-// دالة فتح المودال وتعبئة البيانات
 function openServiceModal(index) {
     const services = JSON.parse(localStorage.getItem('clinicData')) || [];
     const service = services[index];
     if (!service) return;
 
-    // بنعبي الداتا جوه الـ HTML بتاع المودال
     document.getElementById('modalTitle').textContent = service.title;
     document.getElementById('modalDuration').textContent = `Duration: ${service.duration}`;
     document.getElementById('modalDesc').textContent = service.desc || "Experience our premium aesthetic treatment tailored to your specific needs, prioritizing safety and natural-looking results.";
@@ -268,30 +261,57 @@ function openServiceModal(index) {
         priceContainer.innerHTML = `<span style="color: #333; font-weight: bold; font-size: 20px;">$${service.price}</span>`;
     }
 
-    // إظهار المودال
     const modal = document.getElementById('serviceModal');
     if(modal) modal.classList.add('active');
 }
 
-// دالة إغلاق المودال
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('serviceModal');
-    const closeBtn = document.querySelector('.close-btn');
+// ==========================================
+// لوجيك تسجيل الدخول / البروفايل (المعدل 🛠️)
+// ==========================================
+function initUserAuth() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    const navLoginBtn = document.getElementById('navLoginBtn');
+    const navProfile = document.getElementById('navProfile'); // ده اللي هندوس عليه
+    const navUserName = document.getElementById('navUserName');
+    const adminDashLink = document.getElementById('adminDashLink');
+    const clientDropdown = document.getElementById('clientDropdown');
+    const clientLogoutBtn = document.getElementById('clientLogoutBtn');
 
-    if (modal && closeBtn) {
-        // القفل من علامة (X)
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
+    if (currentUser) {
+        if (navLoginBtn) navLoginBtn.style.display = 'none';
+        if (navProfile) navProfile.style.display = 'block';
+        if (navUserName) navUserName.textContent = currentUser.name.split(' ')[0]; 
+
+        if (currentUser.role === 'admin' && adminDashLink) {
+            adminDashLink.style.display = 'block';
+        }
+    }
+
+    // التعديل هنا: خلينا navProfile هو اللي يستقبل الضغطة بدل profileTrigger عشان مساحته أكبر
+    if (navProfile && clientDropdown) {
+        navProfile.addEventListener('click', (e) => {
+            e.stopPropagation();
+            clientDropdown.style.display = clientDropdown.style.display === 'block' ? 'none' : 'block';
         });
+    }
 
-        // القفل لو العميل داس في أي مكان فاضي بره المودال
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
+    document.addEventListener('click', () => {
+        if (clientDropdown) clientDropdown.style.display = 'none';
+    });
+
+    if (clientLogoutBtn) {
+        clientLogoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(confirm('Are you sure you want to log out?')) {
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('isAdminLoggedIn');
+                window.location.reload(); 
             }
         });
     }
-});
+}
+
 // ==========================================
 // 5. التشغيل المجمع (DOMContentLoaded واحد فقط!)
 // ==========================================
@@ -302,4 +322,21 @@ document.addEventListener('DOMContentLoaded', () => {
     initGallerySliders();
     handleContactForm();
     initScrollReveal();
+    // handleBooking(); // وقفت دي هنا عشان إنتي عاملة ملف booking.js للباك إند، عشان ميعملوش تعارض مع بعض
+    initUserAuth(); 
+    
+    // إغلاق المودال
+    const modal = document.getElementById('serviceModal');
+    const closeBtn = document.querySelector('.close-btn');
+
+    if (modal && closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    }
 });

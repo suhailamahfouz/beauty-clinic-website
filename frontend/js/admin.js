@@ -3,63 +3,82 @@
 // ==========================================
 
 // ==========================================
-// 1. نظام إدارة الحجوزات (Bookings)
+// 1. نظام إدارة الحجوزات (Bookings) - مربوط بالباك إند 🍃
 // ==========================================
-function displayBookings() {
+async function displayBookings() {
     const tableBody = document.getElementById('adminBookingsTable');
     if (!tableBody) return;
 
-    const bookings = JSON.parse(localStorage.getItem('clinicBookings')) || [];
-    tableBody.innerHTML = ''; 
+    try {
+        // بنجيب الحجوزات الحقيقية من السيرفر
+        const response = await fetch('http://localhost:3000/api/bookings');
+        const bookings = await response.json();
 
-    if (bookings.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 30px; color: #999;">No requests yet.</td></tr>';
-        return;
-    }
+        tableBody.innerHTML = ''; 
 
-    bookings.reverse().forEach(booking => {
-        const isConfirmed = booking.status === 'Confirmed';
-        const statusClass = isConfirmed ? 'status-confirmed' : 'status-pending';
-
-        const row = `
-            <tr>
-                <td style="font-weight: 500; color: #333;">${booking.name} <br> <small style="color:#aaa">${booking.phone}</small></td>
-                <td>${booking.service}</td>
-                <td>${booking.doctor}</td>
-                <td>${booking.date} at ${booking.time}</td>
-                <td><span class="status-badge ${statusClass}">${booking.status}</span></td>
-                <td>
-                    <button class="btn-action btn-confirm" 
-                            ${isConfirmed ? 'disabled' : ''} 
-                            onclick="confirmAppt(${booking.id})">
-                        ${isConfirmed ? 'Approved' : 'Confirm'}
-                    </button>
-                </td>
-            </tr>
-        `;
-        tableBody.innerHTML += row;
-    });
-}
-
-function confirmAppt(id) {
-    let bookings = JSON.parse(localStorage.getItem('clinicBookings')) || [];
-    const index = bookings.findIndex(b => b.id === id);
-    
-    if (index !== -1) {
-        bookings[index].status = 'Confirmed';
-        localStorage.setItem('clinicBookings', JSON.stringify(bookings));
-        
-        const banner = document.getElementById('successBanner');
-        if (banner) {
-            banner.style.display = 'flex';
-            setTimeout(() => { banner.style.display = 'none'; displayBookings(); }, 2000);
+        if (bookings.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 30px; color: #999;">No requests yet.</td></tr>';
+            return;
         }
-        displayBookings(); 
+
+        bookings.forEach(booking => {
+            const isConfirmed = booking.status === 'Confirmed';
+            const statusClass = isConfirmed ? 'status-confirmed' : 'status-pending';
+
+            // لاحظي غيرنا booking.id لـ booking._id عشان دي طريقة MongoDB
+            const row = `
+                <tr>
+                    <td style="font-weight: 500; color: #333;">${booking.name} <br> <small style="color:#aaa">${booking.phone}</small></td>
+                    <td>${booking.service}</td>
+                    <td>${booking.doctor}</td>
+                    <td>${booking.date} at ${booking.time}</td>
+                    <td><span class="status-badge ${statusClass}">${booking.status}</span></td>
+                    <td>
+                        <button class="btn-action btn-confirm" 
+                                ${isConfirmed ? 'disabled' : ''} 
+                                onclick="confirmAppt('${booking._id}')">
+                            ${isConfirmed ? 'Approved' : 'Confirm'}
+                        </button>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+    } catch (error) {
+        console.error("Error fetching bookings:", error);
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:red;">Failed to load data from server. Is Node.js running?</td></tr>';
     }
 }
 
+// خلينا الدالة تابعة للـ window عشان الـ HTML يشوفها
+window.confirmAppt = async function(id) {
+    console.log("🔘 Button Clicked! Trying to confirm ID:", id); 
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/bookings/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: 'Confirmed' })
+        });
+
+        if (response.ok) {
+            // إظهار رسالة النجاح الخضراء
+            const banner = document.getElementById('successBanner');
+            if (banner) {
+                banner.style.display = 'flex';
+                setTimeout(() => { banner.style.display = 'none'; }, 2000);
+            }
+            displayBookings(); // ريفريش للجدول عشان الكلمة تتغير
+        } else {
+            console.error("❌ Server rejected the request");
+        }
+    } catch (error) {
+        console.error("🔥 Error confirming appointment:", error);
+        alert("Failed to connect to the server.");
+    }
+};
 // ==========================================
-// 2. نظام إدارة المنتجات (Store Products)
+// 2. نظام إدارة المنتجات (Store Products) - LocalStorage
 // ==========================================
 function displayAdminProducts() {
     const tableBody = document.getElementById('adminProductsTable');
@@ -107,7 +126,7 @@ function deleteProduct(id) {
 }
 
 // ==========================================
-// 3. نظام إدارة الأطباء (Specialists)
+// 3. نظام إدارة الأطباء (Specialists) - LocalStorage
 // ==========================================
 function displayAdminSpecialists() {
     const tableBody = document.getElementById('adminSpecialistsTable');
@@ -136,8 +155,9 @@ window.deleteSpecialist = function(id) {
         displayAdminSpecialists();
     }
 };
+
 // ==========================================
-// 5. نظام إدارة الرسائل (Messages)
+// 5. نظام إدارة الرسائل (Messages) - LocalStorage
 // ==========================================
 function displayAdminMessages() {
     const container = document.getElementById('adminMessagesList');
@@ -151,7 +171,6 @@ function displayAdminMessages() {
         return;
     }
 
-    // بنعكسهم عشان أحدث رسالة تظهر فوق
     messages.reverse().forEach(msg => {
         container.innerHTML += `
             <div class="full-message">
@@ -169,91 +188,97 @@ function displayAdminMessages() {
 }
 
 // ==========================================
-// 6. إحصائيات الداشبورد الرئيسية (Dashboard Stats)
+// 6. إحصائيات الداشبورد الرئيسية (Dashboard Stats) - مربوطة بالداتابيز 🍃
 // ==========================================
-function updateDashboardStats() {
+async function updateDashboardStats() {
     const statsGrid = document.querySelector('.stats-grid');
-    if (!statsGrid) return; // لو مش في الداشبورد متعملش حاجة
+    if (!statsGrid) return; 
 
-    const bookings = JSON.parse(localStorage.getItem('clinicBookings')) || [];
-    const messages = JSON.parse(localStorage.getItem('clinicMessages')) || [];
-    const products = JSON.parse(localStorage.getItem('clinicStoreProducts')) || [];
-    const specialists = JSON.parse(localStorage.getItem('clinicSpecialists')) || [];
+    try {
+        // بنجيب الحجوزات من السيرفر عشان الأرقام تبقى حقيقية
+        const response = await fetch('http://localhost:3000/api/bookings');
+        const bookings = await response.json();
 
-    // حساب الأرقام
-    const pendingCount = bookings.filter(b => b.status === 'Pending').length;
-    const confirmedCount = bookings.filter(b => b.status === 'Confirmed').length;
-    
-    // تحديث الأرقام في الـ HTML
-    const elConfirmed = document.getElementById('statConfirmedAppts');
-    const elPending = document.getElementById('statPendingBookings');
-    const elMessages = document.getElementById('statUnreadMessages');
-    const elProducts = document.getElementById('statTotalProducts');
-    const elDoctors = document.getElementById('statTotalDoctors');
+        const messages = JSON.parse(localStorage.getItem('clinicMessages')) || [];
+        const products = JSON.parse(localStorage.getItem('clinicStoreProducts')) || [];
+        const specialists = JSON.parse(localStorage.getItem('clinicSpecialists')) || [];
 
-    if(elConfirmed) elConfirmed.textContent = confirmedCount;
-    if(elPending) elPending.textContent = pendingCount;
-    if(elMessages) elMessages.textContent = messages.length;
-    if(elProducts) elProducts.textContent = products.length;
-    if(elDoctors) elDoctors.textContent = specialists.length;
+        const pendingCount = bookings.filter(b => b.status === 'Pending').length;
+        const confirmedCount = bookings.filter(b => b.status === 'Confirmed').length;
+        
+        const elConfirmed = document.getElementById('statConfirmedAppts');
+        const elPending = document.getElementById('statPendingBookings');
+        const elMessages = document.getElementById('statUnreadMessages');
+        const elProducts = document.getElementById('statTotalProducts');
+        const elDoctors = document.getElementById('statTotalDoctors');
 
-    // تحديث جدول "أحدث الحجوزات" في الداشبورد
-    const dashBookingsTable = document.getElementById('adminDashboardBookings');
-    if (dashBookingsTable) {
-        dashBookingsTable.innerHTML = '';
-        // بناخد أحدث 4 حجوزات بس نعرضهم
-        bookings.slice().reverse().slice(0, 4).forEach(b => {
-            const badgeClass = b.status === 'Confirmed' ? 'status-confirmed' : 'status-pending';
-            dashBookingsTable.innerHTML += `
-                <tr>
-                    <td>${b.name}</td>
-                    <td>${b.service}</td>
-                    <td>${b.doctor}</td>
-                    <td>${b.date}</td>
-                    <td>${b.time}</td>
-                    <td><span class="status-badge ${badgeClass}">${b.status}</span></td>
-                </tr>
-            `;
-        });
+        if(elConfirmed) elConfirmed.textContent = confirmedCount;
+        if(elPending) elPending.textContent = pendingCount;
+        if(elMessages) elMessages.textContent = messages.length;
+        if(elProducts) elProducts.textContent = products.length;
+        if(elDoctors) elDoctors.textContent = specialists.length;
+
+        // تحديث جدول الداشبورد
+        const dashBookingsTable = document.getElementById('adminDashboardBookings');
+        if (dashBookingsTable) {
+            dashBookingsTable.innerHTML = '';
+            bookings.slice(0, 4).forEach(b => {
+                const badgeClass = b.status === 'Confirmed' ? 'status-confirmed' : 'status-pending';
+                dashBookingsTable.innerHTML += `
+                    <tr>
+                        <td>${b.name}</td>
+                        <td>${b.service}</td>
+                        <td>${b.doctor}</td>
+                        <td>${b.date}</td>
+                        <td>${b.time}</td>
+                        <td><span class="status-badge ${badgeClass}">${b.status}</span></td>
+                    </tr>
+                `;
+            });
+        }
+    } catch (error) {
+        console.log("Error updating stats", error);
     }
 }
+
 // ==========================================
 // 7. تفعيل أزرار الهيدر (Topbar Actions)
 // ==========================================
 function initTopbarActions() {
-    // 1. زرار الـ Refresh (إعادة تحميل الصفحة)
     const refreshBtn = document.querySelector('.fa-sync-alt');
     if (refreshBtn) {
         refreshBtn.style.cursor = 'pointer';
         refreshBtn.addEventListener('click', () => window.location.reload());
     }
 
-    // 2. زرار الإشعارات (الجرس)
     const bellBtn = document.querySelector('.fa-bell');
     if (bellBtn) {
         bellBtn.style.cursor = 'pointer';
-        bellBtn.addEventListener('click', () => {
-            const bookings = JSON.parse(localStorage.getItem('clinicBookings')) || [];
-            const messages = JSON.parse(localStorage.getItem('clinicMessages')) || [];
-            const pending = bookings.filter(b => b.status === 'Pending').length;
-            alert(`🔔 Notifications:\n- You have ${pending} new booking requests.\n- You have ${messages.length} unread messages.`);
+        bellBtn.addEventListener('click', async () => {
+            // بنقرأ الحجوزات من السيرفر للإشعار
+            try {
+                const res = await fetch('http://localhost:3000/api/bookings');
+                const bookings = await res.json();
+                const pending = bookings.filter(b => b.status === 'Pending').length;
+                const messages = JSON.parse(localStorage.getItem('clinicMessages')) || [];
+                alert(`🔔 Notifications:\n- You have ${pending} new booking requests.\n- You have ${messages.length} unread messages.`);
+            } catch (e) {
+                alert("🔔 Notifications system is offline.");
+            }
         });
     }
     
-    // 3. زرار البحث (Search)
     const searchBtn = document.querySelector('.fa-search');
     if (searchBtn) {
         searchBtn.style.cursor = 'pointer';
         searchBtn.addEventListener('click', () => prompt("🔍 Search in dashboard:"));
     }
 
-    // 4. بروفايل الأدمن (تسجيل الخروج - Logout)
     const profileInfo = document.querySelector('.profile-info');
     if (profileInfo) {
         profileInfo.style.cursor = 'pointer';
-        profileInfo.style.position = 'relative'; // عشان القائمة تظهر تحته
+        profileInfo.style.position = 'relative'; 
         
-        // إنشاء القائمة المنسدلة برمجياً
         const dropdown = document.createElement('div');
         dropdown.innerHTML = `<i class="fas fa-sign-out-alt"></i> Logout`;
         dropdown.style.cssText = `
@@ -264,12 +289,10 @@ function initTopbarActions() {
         `;
         profileInfo.appendChild(dropdown);
 
-        // إظهار/إخفاء القائمة لما ندوس
         profileInfo.addEventListener('click', (e) => {
             dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
         });
 
-        // تنفيذ تسجيل الخروج
         dropdown.addEventListener('click', (e) => {
             e.stopPropagation(); 
             if(confirm("Are you sure you want to log out?")) {
@@ -278,27 +301,23 @@ function initTopbarActions() {
             }
         });
         
-        // لو دوسنا في أي مكان فاضي الشاشة القائمة تقفل
         document.addEventListener('click', (e) => {
             if (!profileInfo.contains(e.target)) dropdown.style.display = 'none';
         });
     }
 }
+
 // ==========================================
 // 4. التشغيل الموحد عند فتح أي صفحة أدمن
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     
-    // تشغيل الجداول (بيشوف إحنا في أي صفحة وبيشغل الجدول بتاعها)
     displayBookings();
     displayAdminProducts();
     displayAdminSpecialists();
-    
-    // الدالتين الجداد اللي لسه ضايفينهم 👇
     displayAdminMessages();
     updateDashboardStats();
-
-   initTopbarActions();
+    initTopbarActions();
 
     // -- أ) لوجيك فورم إضافة المنتجات --
     const addProductForm = document.getElementById('addProductForm');
@@ -346,17 +365,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const newService = {
-                        title: title,
-                        duration: duration,
-                        price: price,
-                        offer: offer, 
-                        img: e.target.result,
-                        desc: desc
+                        title: title, duration: duration, price: price, offer: offer, 
+                        img: e.target.result, desc: desc
                     };
                     let storedServices = JSON.parse(localStorage.getItem('clinicData')) || [];
                     storedServices.push(newService);
                     localStorage.setItem('clinicData', JSON.stringify(storedServices));
-
                     alert('Service Uploaded Successfully! 🎉');
                     addServiceForm.reset(); 
                 };
@@ -379,16 +393,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const newDoc = {
-                        id: Date.now(),
-                        name: name,
-                        title: title,
-                        desc: desc,
-                        img: e.target.result
+                        id: Date.now(), name: name, title: title, desc: desc, img: e.target.result
                     };
                     let specialists = JSON.parse(localStorage.getItem('clinicSpecialists')) || [];
                     specialists.push(newDoc);
                     localStorage.setItem('clinicSpecialists', JSON.stringify(specialists));
-
                     alert('Doctor Added Successfully! 👨‍⚕️');
                     addSpecialistForm.reset(); 
                     displayAdminSpecialists();

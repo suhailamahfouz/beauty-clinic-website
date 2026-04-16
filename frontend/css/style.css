@@ -28,7 +28,7 @@ a { text-decoration: none; color: var(--text-main); }
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 5%; background-color: rgba(229, 186, 191, 0.88); 
     border-bottom: 1px solid rgba(181, 90, 104, 0.3); 
-    position: fixed; width: 100%; top: 0; z-index: 100;
+    position: fixed; width: 100%;  z-index: 100;
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
 
@@ -80,9 +80,9 @@ a { text-decoration: none; color: var(--text-main); }
    ========================================= */
 .hero {
     height: 100vh; display: flex; align-items: center; justify-content: flex-start;
-    text-align: left; padding-left: 10%; background-color: #e6bfdf3e;
+    text-align: left; padding-left: 10%; background-color: #f1c4e93e;
     background-image: url('../images/home-page.png'); background-repeat: no-repeat;
-    background-size: 70%; background-position: right bottom; background-blend-mode: overlay;
+    background-size: 90%; background-position: right bottom; background-blend-mode: overlay;
 }
 .hero-content { max-width: 600px; }
 .hero-content h1 { font-family: var(--font-heading); font-size: 80px; letter-spacing: 2px; margin-bottom: 10px; color: var(--primary-pink); }
@@ -309,3 +309,54 @@ body {
 .reveal:nth-child(2) { transition-delay: 0.1s; }
 .reveal:nth-child(3) { transition-delay: 0.2s; }
 .reveal:nth-child(4) { transition-delay: 0.3s; }
+
+/* ========================================== */
+/* Profile Page Styles */
+/* ========================================== */
+
+.profile-page {
+    background-color: #fdf5f6; /* لون بينك فاتح جداً مريح للعين */
+}
+
+.profile-container {
+    max-width: 1000px;
+    margin: 130px auto 50px; /* خلينا الرقم اللي فوق 130 بدل 100 عشان ينزل تحت النافبار براحته */
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+}
+.profile-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* ستايل حالات الحجز (Pending & Confirmed) */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-confirmed {
+    background: #d4edda;
+    color: #155724;
+}
+
