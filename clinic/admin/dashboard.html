@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - The Beauty Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="icon" href="../images/Logo.png" type="image/png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>The <i>Beauty</i> Clinic.</h2>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active"><a href="#" class="nav-link active-btn"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="nav-item"><a href="bookings.html" class="nav-link"><i class="fas fa-calendar-check"></i> Booking Requests</a></li>
+            <li class="nav-item"><a href="services.html" class="nav-link"><i class="fas fa-spa"></i> Services</a></li>
+            <li class="nav-item"><a href="specialists.html" class="nav-link"><i class="fas fa-user-md"></i> Specialists</a></li>
+            <li class="nav-item"><a href="appointments.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+            <li class="nav-item"><a href="products.html" class="nav-link"><i class="fas fa-box-open"></i> Products</a></li>
+            <li class="nav-item"><a href="messages.html" class="nav-link"><i class="fas fa-envelope"></i> Messages</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="social-icons">
+                <i class="fas fa-globe"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+            &copy; 2024 The Beauty Clinic.<br>All rights reserved.
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        
+        <header class="topbar">
+            <div class="topbar-profile">
+                <div class="topbar-icons">
+                    <i class="fas fa-search"></i>
+                    <i class="far fa-bell"></i>
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="profile-info">
+                    <img src="../images/logo.png" alt="Admin" onerror="this.src='https://ui-avatars.com/api/?name=Admin&background=8b3a4a&color=fff'">
+                    <div class="profile-text">
+                        <h4>The Beauty Clinic</h4>
+                        <p>admin@thebeautyclinic.com</p>
+                    </div>
+                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            
+            <div class="dashboard-header">
+                <div class="header-title">
+                    <h1>Welcome back, Admin 👋</h1>
+                    <p>Here's what's happening with your clinic today.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="date-picker">
+                        <i class="far fa-calendar-alt"></i> May 19, 2026 <i class="fas fa-chevron-down" style="margin-left: 8px; font-size: 10px;"></i>
+                    </div>
+                    <button class="btn-add-new">
+                        <i class="fas fa-plus"></i> New Booking
+                    </button>
+                </div>
+            </div>
+
+            <div class="premium-stats-grid">
+                <div class="premium-stat-card">
+                    <div class="icon-box" style="background: #fdf2f4; color: #d34c60;"><i class="far fa-calendar-check"></i></div>
+                    <div class="stat-card-v2">
+                        <h3 id="statConfirmedAppts" class="stat-num">0</h3>
+                        <p class="stat-desc">Confirmed Appts</p>
+                        <span class="trend-text trend-up">↑ 20% vs yesterday</span>
+                    </div>
+                </div>
+                
+                <div class="premium-stat-card">
+                    <div class="icon-box" style="background: #fdf2f4; color: #d34c60;"><i class="far fa-file-alt"></i></div>
+                    <div class="stat-card-v2">
+                        <h3 id="statPendingBookings" class="stat-num">0</h3>
+                        <p class="stat-desc">New Requests</p>
+                        <span class="trend-text trend-up">↑ 15% vs yesterday</span>
+                    </div>
+                </div>
+                
+                <div class="premium-stat-card">
+                    <div class="icon-box" style="background: #fef6e5; color: #f39c12;"><i class="far fa-envelope"></i></div>
+                    <div class="stat-card-v2">
+                        <h3 id="statUnreadMessages" class="stat-num">0</h3>
+                        <p class="stat-desc">Unread Messages</p>
+                        <span class="trend-text trend-down">↓ 5 new</span>
+                    </div>
+                </div>
+                
+                <div class="premium-stat-card">
+                    <div class="icon-box" style="background: #f4f0fb; color: #8e44ad;"><i class="fas fa-shopping-bag"></i></div>
+                    <div class="stat-card-v2">
+                        <h3 id="statTotalProducts" class="stat-num">0</h3>
+                        <p class="stat-desc">Total Products</p>
+                        <span class="trend-text trend-up">↑ 12% vs yesterday</span>
+                    </div>
+                </div>
+                
+                <div class="premium-stat-card">
+                    <div class="icon-box" style="background: #ebf7ed; color: #28a745;"><i class="far fa-user"></i></div>
+                    <div class="stat-card-v2">
+                        <h3 id="statTotalDoctors" class="stat-num">0</h3>
+                        <p class="stat-desc">Active Specialists</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tables-grid" style="grid-template-columns: 1.8fr 1fr; gap: 20px;">
+                
+                <div class="panel-v2">
+                    <div class="panel-header-v2">
+                        <h3><i class="far fa-calendar-alt" style="color: var(--primary);"></i> Booking Requests</h3>
+                        <a href="bookings.html" class="view-link">View All →</a>
+                    </div>
+                    <table class="premium-table">
+                        <thead>
+                            <tr><th>Client</th><th>Service</th><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th><th></th></tr>
+                        </thead>
+                        <tbody id="adminDashboardBookings">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-v2">
+                    <div class="panel-header-v2">
+                        <h3><i class="far fa-calendar-check" style="color: var(--primary);"></i> Today's Schedule</h3>
+                        <a href="appointments.html" class="view-link">View Calendar</a>
+                    </div>
+                    <div class="schedule-timeline" id="adminDashboardSchedule">
+                        </div>
+                    <a href="appointments.html" class="view-link" style="display: block; margin-top: 20px;">View full schedule →</a>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/admin.js?v=8000"></script>
+</body>
+</html>

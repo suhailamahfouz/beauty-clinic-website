@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - The Beauty Clinic</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        
+        .navbar {
+            margin-top: -160px;
+        }
+        /* CSS مخصص لصفحة البروفايل عشان تبقى مميزة */
+        body.profile-page-body {
+            background-color: #fcfcfc !important; 
+            background-image: url('images/bg-pattern.png') !important; 
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .profile-page-wrapper {
+            max-width: 1400px; /* متوسعة عشان تستوعب 3 كروت */
+            margin: 160px auto 40px auto; /* تم إضافة الـ 160px من فوق */
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1.2fr; /* الـ 3 كروت جنب بعض */
+            gap: 25px;
+            align-items: start;
+        }
+
+        .custom-profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            border: 1px solid rgba(216, 27, 96, 0.05);
+            transition: transform 0.3s ease;
+            
+        }
+
+        .custom-profile-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .profile-header-custom {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed #f0f0f0;
+        }
+
+        .profile-header-custom i {
+            font-size: 28px;
+            color: var(--primary-pink);
+            background: #fff0f5;
+            padding: 15px;
+            border-radius: 50%;
+        }
+
+        .profile-header-custom h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #333;
+            margin: 0;
+        }
+
+        /* تحسين شكل الفورم */
+        .custom-form-group {
+            margin-bottom: 20px;
+        }
+
+        .custom-form-group label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .custom-form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background-color: #fdfdfd;
+        }
+
+        .custom-form-group input:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.1);
+            outline: none;
+        }
+
+        .custom-form-group input[readonly] {
+            background-color: #f5f5f5;
+            color: #888;
+            border-color: #eee;
+            cursor: not-allowed;
+        }
+
+        /* تحسين جدول المواعيد والطلبات */
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        .custom-table th {
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            padding: 0 15px 10px 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .custom-table tbody tr {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
+        }
+
+        .custom-table tbody tr:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transform: scale(1.01);
+        }
+
+        .custom-table td {
+            padding: 20px 15px;
+            font-size: 14px;
+            color: #444;
+            border-top: 1px solid #f9f9f9;
+            border-bottom: 1px solid #f9f9f9;
+        }
+
+        .custom-table td:first-child {
+            border-left: 1px solid #f9f9f9;
+            border-radius: 10px 0 0 10px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .custom-table td:last-child {
+            border-right: 1px solid #f9f9f9;
+            border-radius: 0 10px 10px 0;
+        }
+
+        /* شارات الحالة */
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-pending { background: #fff8e1; color: #ffb300; }
+        .status-confirmed { background: #e8f5e9; color: #2e7d32; }
+        .status-rejected { background: #ffebee; color: #c62828; }
+
+        /* ريسبونسف (للموبايل والتابلت) */
+        @media (max-width: 1100px) {
+            .profile-page-wrapper {
+                grid-template-columns: 1fr 1fr; /* كارتين جنب بعض في الشاشات المتوسطة */
+            }
+        }
+        @media (max-width: 900px) {
+            .profile-page-wrapper {
+                grid-template-columns: 1fr; /* كارت واحد تحت التاني في الموبايل */
+                margin-top: 120px;
+            }
+            .custom-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body class="profile-page-body">
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="specialists.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+        <div class="logo">
+            <a href="index.html" class="logo-container">
+                <img src="images/logo.png" alt="Logo">
+                <h2>The <span>Beauty</span> Clinic</h2>
+            </a>
+        </div>
+        <div class="user-auth-area" style="display: flex; align-items: center; gap: 15px; margin-left: 20px;">
+            <div class="nav-profile" id="navProfile" style="position: relative; cursor: pointer;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-user-circle" style="font-size: 22px; color: var(--primary-pink);"></i>
+                    <span id="navUserName" style="font-weight: 500;">User</span>
+                </div>
+                <div id="clientDropdown" style="display: none; position: absolute; top: 130%; right: 0; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 8px; width: 160px; z-index: 1000;">
+                    <a href="index.html" style="padding: 12px 15px; display: block; color: #333; text-decoration: none; border-bottom: 1px solid #eee;"><i class="fas fa-home"></i> Home</a>
+                    <a href="#" id="clientLogoutBtn" style="padding: 12px 15px; color: #dc3545; text-decoration: none; display: block;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+            <a href="booking.html" class="btn-book-nav">BOOK NOW</a>
+        </div>
+    </header>
+
+    <main class="profile-page-wrapper">
+        <!-- كارت البيانات الشخصية -->
+        <div class="custom-profile-card">
+            <div class="profile-header-custom">
+                <i class="fas fa-user-edit"></i>
+                <h3>My Details</h3>
+            </div>
+            <form id="updateProfileForm">
+                <div class="custom-form-group">
+                    <label><i class="fas fa-id-card" style="color:#aaa; margin-right:5px;"></i> Full Name</label>
+                    <input type="text" id="profileName" required>
+                </div>
+                <div class="custom-form-group">
+                    <label><i class="fas fa-envelope" style="color:#aaa; margin-right:5px;"></i> Email Address</label>
+                    <input type="email" id="profileEmail" readonly title="Email cannot be changed">
+                </div>
+                <div class="custom-form-group">
+                    <label><i class="fas fa-phone-alt" style="color:#aaa; margin-right:5px;"></i> Phone Number</label>
+                    <input type="tel" id="profilePhone" required>
+                </div>
+                <button type="submit" class="btn-card-solid" style="width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; margin-top: 10px;">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </form>
+        </div>
+
+        <!-- كارت المواعيد -->
+        <div class="custom-profile-card">
+            <div class="profile-header-custom">
+                <i class="fas fa-calendar-check"></i>
+                <h3>My Appointments</h3>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Doctor</th>
+                            <th>Date & Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userBookingsBody">
+                        <tr><td colspan="4" style="text-align: center; padding: 40px; color: #888;"><i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i> Loading your appointments...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- كارت الطلبات (My Orders) -->
+        <div class="custom-profile-card">
+            <div class="profile-header-custom">
+                <i class="fas fa-shopping-bag"></i>
+                <h3>My Orders</h3>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userOrdersBody">
+                        <tr><td colspan="4" style="text-align: center; padding: 40px; color: #888;"><i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i> Loading your orders...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- ربط الملفات -->
+    <script src="js/script.js?v=8000"></script>
+    <script src="js/profile.js?v=8000"></script>
+</body>
+</html>

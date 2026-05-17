@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Booking Requests</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="icon" href="../images/Logo.png" type="image/png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>The <i>Beauty</i> Clinic.</h2>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="nav-item active"><a href="bookings.html" class="nav-link active-btn"><i class="fas fa-calendar-check"></i> Booking Requests</a></li>
+            <li class="nav-item"><a href="services.html" class="nav-link"><i class="fas fa-spa"></i> Services</a></li>
+            <li class="nav-item"><a href="specialists.html" class="nav-link"><i class="fas fa-user-md"></i> Specialists</a></li>
+            <li class="nav-item"><a href="appointments.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+            <li class="nav-item"><a href="products.html" class="nav-link"><i class="fas fa-box-open"></i> Products</a></li>
+            <li class="nav-item"><a href="users.html" class="nav-link"><i class="fas fa-users"></i> Users</a></li>
+            <li class="nav-item"><a href="messages.html" class="nav-link"><i class="fas fa-envelope"></i> Messages</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="social-icons">
+                <i class="fas fa-globe"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+            &copy; 2024 The Beauty Clinic.
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        
+        <header class="topbar">
+            
+            
+            <div class="topbar-profile">
+                <div class="topbar-icons">
+                    <i class="fas fa-search"></i>
+                    <i class="far fa-bell"></i>
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="profile-info">
+                    <img src="../images/logo.png" alt="Admin" onerror="this.src='https://ui-avatars.com/api/?name=Admin&background=8b3a4a&color=fff'">
+                    <div class="profile-text">
+                        <h4>The Beauty Clinic</h4>
+                        <p>admin@thebeautyclinic.com</p>
+                    </div>
+                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            
+            <div class="dashboard-header">
+                <div class="header-title">
+                    <h1 style="font-size: 26px; color: #222; font-family: 'Playfair Display'; margin-bottom: 5px;">Booking Requests</h1>
+                    <p style="color: #777; font-size: 13px; margin: 0;">Manage, review, and confirm all your client appointments.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-add-new">
+                        <i class="fas fa-plus"></i> New Booking
+                    </button>
+                </div>
+            </div>
+
+            <div class="bookings-stats-grid">
+                <div class="b-stat-card">
+                    <div class="icon-box" style="background: #fdf2f4; color: #d34c60;"><i class="far fa-calendar-alt"></i></div>
+                    <div class="stat-card-v2">
+                        <h3 id="statTotalReq" class="stat-num">0</h3>
+                        <p class="stat-desc">Total Requests</p>
+                        <span class="trend-text trend-up">↑ 20% vs last week</span>
+                    </div>
+                </div>
+                <div class="b-stat-card">
+                    <div class="icon-box" style="background: #ebf7ed; color: #28a745;"><i class="far fa-check-circle"></i></div>
+                    <div class="stat-card-v2">
+                        <h3 id="statConfReq" class="stat-num">0</h3>
+                        <p class="stat-desc">Confirmed</p>
+                        <span class="trend-text trend-up">↑ 15% vs last week</span>
+                    </div>
+                </div>
+                <div class="b-stat-card">
+                    <div class="icon-box" style="background: #fef6e5; color: #f39c12;"><i class="far fa-clock"></i></div>
+                    <div class="stat-card-v2">
+                        <h3 id="statPendReq" class="stat-num">0</h3>
+                        <p class="stat-desc">Pending</p>
+                        <span class="trend-text trend-down">↓ 10% vs last week</span>
+                    </div>
+                </div>
+                <div class="b-stat-card">
+                    <div class="icon-box" style="background: #fce8e6; color: #dc3545;"><i class="far fa-times-circle"></i></div>
+                    <div class="stat-card-v2">
+                        <h3 id="statRejReq" class="stat-num">0</h3>
+                        <p class="stat-desc">Rejected</p>
+                        <span class="trend-text trend-down">↓ 5% vs last week</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters-bar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="filterSearch" placeholder="Search by client name or phone..." oninput="filterBookings()">
+                </div>
+                <select id="filterService" class="filter-select" onchange="filterBookings()">
+                    <option value="All">All Services</option>
+                </select>
+                <select id="filterDoctor" class="filter-select" onchange="filterBookings()">
+                    <option value="All">All Doctors</option>
+                </select>
+                <select id="filterStatus" class="filter-select" onchange="filterBookings()">
+                    <option value="All">All Status</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+                <input type="date" id="filterDate" class="filter-select" onchange="filterBookings()" style="cursor: pointer; color: #555;">
+            </div>
+
+            <div class="success-banner" id="successBanner" style="display: none;">
+                <i class="fas fa-check-circle"></i> The booking request has been updated successfully!
+            </div>
+
+            <div class="panel-v2">
+                <table class="premium-table">
+                    <thead>
+                        <tr>
+                            <th>Client Info</th>
+                            <th>Service</th>
+                            <th>Doctor</th>
+                            <th>Date & Time <i class="fas fa-sort" style="color: #ccc; margin-left:5px;"></i></th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminBookingsTable">
+                        </tbody>
+                </table>
+
+                <div class="pagination-row">
+                    <span style="color: #777; font-size: 13px;">Showing 1 to 5 of 20 results</span>
+                    <div class="page-numbers">
+                        <button><i class="fas fa-chevron-left"></i></button>
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #777;">
+                        Show 
+                        <select style="padding: 5px; border: 1px solid #eee; border-radius: 4px; outline: none;">
+                            <option>5</option><option>10</option>
+                        </select> 
+                        per page
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/admin.js?v=8001"></script>
+</body>
+</html>

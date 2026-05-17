@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Beauty Clinic - Our Services</title>
+    <link rel="stylesheet" href="css/style.css?v=100">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="specialists.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+        
+        <div class="logo">
+            <a href="index.html" class="logo-container">
+                <img src="images/logo.png" alt="Beauty Clinic Logo">
+                <h2>The <span>Beauty</span> Clinic</h2>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="user-auth-area" style="display: flex; align-items: center; gap: 15px; margin-left: 20px;">
+            <a href="login.html" class="nav-link" id="navLoginBtn" style="font-weight: 500;"><i class="fas fa-sign-in-alt"></i> Login</a>
+            
+            <div class="nav-profile" id="navProfile" style="display: none; position: relative; cursor: pointer;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-user-circle" style="font-size: 22px; color: var(--primary-pink);"></i>
+                    <span id="navUserName" style="font-weight: 500;">User</span>
+                </div>
+                
+                <div id="clientDropdown" style="display: none; position: absolute; top: 130%; right: 0; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 8px; width: 160px; z-index: 1000; overflow: hidden;">
+                    <a href="profile.html" id="clientProfileLink" style="padding: 12px 15px; color: #333; text-decoration: none; display: block; border-bottom: 1px solid #eee; font-size: 14px;"><i class="fas fa-user-circle"></i> My Profile</a>
+                    <a href="#" id="clientLogoutBtn" style="padding: 12px 15px; color: #dc3545; text-decoration: none; display: block; font-size: 14px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <a href="booking.html" class="btn-book-nav">BOOK NOW</a>
+    </header>
+
+    <section class="page-header">
+        <h1>Our Services</h1>
+        <p>Explore our range of beauty and aesthetic treatments.</p>
+    </section>
+
+    <section class="services-container" id="servicesContainer">
+        </section>
+
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modalTitle">Service Title</h2>
+            <p class="modal-duration" id="modalDuration">Duration: -- min</p>
+            
+            <div id="modalPriceContainer" style="margin: 10px 0;"></div>
+            
+            <div class="modal-body">
+                <p id="modalDesc">Service description goes here...</p>
+                <ul class="modal-benefits">
+                    <li>✓ Safe and effective treatment</li>
+                    <li>✓ Fast recovery with no downtime</li>
+                    <li>✓ Long-lasting results</li>
+                </ul>
+            </div>
+            
+            <a href="booking.html" class="btn-card-solid" style="display: inline-block; margin-top: 20px;">BOOK APPOINTMENT</a>
+        </div>
+    </div>
+
+    <script src="js/script.js?v=8000"></script>
+</body>
+</html>
